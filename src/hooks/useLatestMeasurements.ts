@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchOrThrow } from "@/lib/fetcher";
 import { Measurement } from "@/types/measurement";
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export function useLatestMeasurements() {
   const [data, setData] = useState<Record<string, Measurement>>({});
@@ -12,7 +13,7 @@ export function useLatestMeasurements() {
 
     async function load() {
       try {
-        const json = await fetchOrThrow(`http://localhost:3000/api/measurements/new`);
+        const json = await fetchOrThrow(`${API_URL}/api/measurements/new`);
 
         if (cancelled) return;
 

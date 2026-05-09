@@ -3,6 +3,7 @@ import { MonitoringStation } from "@/types/station";
 import { fetchOrThrow } from "@/lib/fetcher";
 import StationViewTracker from "@/components/analytics/StationViewTracker";
 import { ExportButton } from "@/components/ui/ExportButton";
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 interface Props {
   params: { id: string } | Promise<{ id: string }>;
@@ -12,11 +13,11 @@ export default async function StationPage({ params }: Props) {
   const { id } = await params;
 
   const stationRes = await fetchOrThrow(
-    `http://localhost:3000/api/stations/${id}`
+    `${API_URL}/api/stations/${id}`
   );
 
   const measurementsRes = await fetchOrThrow(
-    `http://localhost:3000/api/measurements?stationId=${id}`
+    `${API_URL}/api/measurements?stationId=${id}`
   );
 
   const station: MonitoringStation = stationRes.data;

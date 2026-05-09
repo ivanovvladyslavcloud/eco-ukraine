@@ -5,8 +5,9 @@ import dynamic from "next/dynamic";
 import { Measurement } from "@/types/measurement";
 import MapClient from "@/components/Map/MapClient";
 import StationFilters from "@/components/stations/StationFilters";
-
 import { MonitoringStation } from "@/types/station";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 const StationMeasurements = dynamic(
   () => import("@/components/stations/StationMeasurements"),
@@ -69,7 +70,7 @@ let active = true;
         setLoadingMeasurements(true);
 
         const res = await fetch(
-          `http://localhost:3000/api/measurements?stationId=${selectedStationId}`
+          `${API_URL}/api/measurements?stationId=${selectedStationId}`
         );
 
         if (!res.ok) {

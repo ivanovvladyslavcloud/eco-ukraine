@@ -4,17 +4,18 @@ import Dashboard from "@/components/ui/Dashboard";
 import { MonitoringStation } from "@/types/station";
 import { fetchOrThrow } from "@/lib/fetcher";
 import { Measurement } from "@/types/measurement";
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export default async function HomePage() {
 
   const stationsJson = await fetchOrThrow(
-    `http://localhost:3000/api/stations/all`
+    `${API_URL}/api/stations/all`
       );
 
   const stations: MonitoringStation[] = stationsJson.data;
 
   const latestJson = await fetchOrThrow(
-    `http://localhost:3000/api/measurements/new`
+    `${API_URL}/api/measurements/new`
       );
   const latest: Measurement[] = latestJson.data;
 

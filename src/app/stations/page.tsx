@@ -6,6 +6,7 @@ import { MonitoringStation } from "@/types/station";
 import { fetchOrThrow } from "@/lib/fetcher";
 import { Measurement } from "@/types/measurement";
 import Link from "next/link"
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export default async function StationsPage({
   searchParams,
@@ -16,7 +17,7 @@ export default async function StationsPage({
   const page = Number(params.page) || 1;
 
   const stationRes = await fetchOrThrow(
-    `http://localhost:3000/api/stations?page=${page}`
+    `${API_URL}/api/stations?page=${page}`
       );
 
   const stations: MonitoringStation[] = stationRes.data;
@@ -33,7 +34,7 @@ export default async function StationsPage({
   const pagination = stationRes.pagination;
 
   const measurementsJson = await fetchOrThrow(
-    `http://localhost:3000/api/measurements/new`
+    `${API_URL}/api/measurements/new`
       );
 
   const currentMeasurements = measurementsJson.data;
