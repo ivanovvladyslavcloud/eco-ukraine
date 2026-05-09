@@ -47,7 +47,7 @@ export default async function HomePage() {
   const averagePm10 =
     values.length > 0
       ? (
-          values.reduce((sum: number, m: any) => sum + m.pm10, 0) /
+          values.reduce((sum: number, m: Measurement) => sum + m.pm10, 0) /
           values.length
         ).toFixed(1)
       : "—";

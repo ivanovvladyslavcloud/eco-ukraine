@@ -3,7 +3,7 @@ import { createLogger } from "@/lib/logger";
 import { ApiError } from "./errors";
 
 export async function withErrorHandling<T>(
-  handler: (ctx: { logger: any; url: URL; requestId?: string }) => Promise<T>,
+  handler: (ctx: { logger: ReturnType<typeof createLogger>; url: URL; requestId?: string }) => Promise<T>,
   context: { url: string; method: string; requestId?: string }
 ) {
   const start = Date.now();
@@ -36,32 +36,38 @@ export async function withErrorHandling<T>(
     });
 
     return NextResponse.json(result);
-  } catch (error: any) {
-    const duration = Date.now() - start;
+  } catch (error: unknown) {
+      const duration = Date.now() - start;
 
-    const status = error instanceof ApiError ? error.status : 500;
+      const err =
+        error instanceof Error
+          ? error
+          : new Error("Unknown error");
 
-    if (status >= 400 && status < 500) {
-      logger.warn({
-        msg: "Client error",
-        status,
-        duration,
-        error: error.message,
-      });
-    }
+      const status =
+        err instanceof ApiError ? err.status : 500;
 
-    if (status >= 500) {
-      logger.error({
-        msg: "Server error",
-        status,
-        duration,
-        error: error.message,
-      });
-    }
+      if (status >= 400 && status < 500) {
+        logger.warn({
+          msg: "Client error",
+          status,
+          duration,
+          error: err.message,
+        });
+      }
+
+      if (status >= 500) {
+        logger.error({
+          msg: "Server error",
+          status,
+          duration,
+          error: err.message,
+        });
+      }
 
     return NextResponse.json(
-      { success: false, error: error.message },
-      { status }
-    );
-  }
+          { success: false, error: err.message },
+          { status }
+        );
+    }
 }

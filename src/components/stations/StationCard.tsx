@@ -1,10 +1,11 @@
 "use client";
 
 import { Measurement } from "@/types/measurement";
+import { MonitoringStation } from "@/types/station";
 import Link from "next/link";
 
 interface Props {
-  station: any;
+  station: MonitoringStation;
   latest?: Measurement;
 }
 
@@ -16,11 +17,11 @@ function getAQIColor(pm25: number) {
 }
 
 export default function StationCard({ station, latest }: Props) {
-  const measurement = latest || station.currentData;
+  const measurement = latest;
 
   const hasData = !!measurement;
 
-  const pm25 = measurement?.pm25;
+  const pm25 = measurement?.pm25 ?? 0;
 
   const color = hasData
     ? getAQIColor(pm25)
