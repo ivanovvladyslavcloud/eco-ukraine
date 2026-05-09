@@ -10,7 +10,21 @@ export function ExportButton({ stationId }: { stationId: string }) {
       source: "station_page",
     });
 
-    window.open(`/api/stations/${stationId}/export`, "_blank");
+    const res = await fetch(`/api/stations/${stationId}/export`);
+
+    if (!res.ok) return;
+
+    const blob = await res.blob();
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `station-${stationId}.csv`;
+    document.body.appendChild(a);
+    a.click();
+
+    a.remove();
+    window.URL.revokeObjectURL(url);
   };
 
   return (
