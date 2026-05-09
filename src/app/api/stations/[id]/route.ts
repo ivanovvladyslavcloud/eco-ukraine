@@ -5,7 +5,7 @@ import { REQUEST_ID_HEADER } from "@/lib/requestId";
 
 export async function GET(req: Request, { params }: any) {
   const requestId = req.headers.get(REQUEST_ID_HEADER) ?? undefined;
-  return withErrorHandling(async ({ logger }) => {
+  return withErrorHandling(async ({}) => {
     const { id } = await params;
 
     const station = stations.find(s => s.id === id);
