@@ -11,16 +11,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <Script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></Script>
-        <Script id="ga-script">
-          {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        />
 
-          gtag('config', '${GA_ID}');
+        <Script id="ga" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            window.gtag = gtag;
+
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}');
           `}
-          
         </Script>
 
         <AnalyticsProvider />
