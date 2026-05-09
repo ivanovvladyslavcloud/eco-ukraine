@@ -7,11 +7,11 @@ import { REQUEST_ID_HEADER } from "@/lib/requestId";
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const requestId = req.headers.get(REQUEST_ID_HEADER) ?? undefined;
   return withErrorHandling(async () => {
-    
+
     const { id: stationId } = await params;
 
     const filtered = measurements.filter(
@@ -19,7 +19,7 @@ export async function GET(
     );
 
     if (!filtered.length) {
-      throw new ApiError("No data for export", 404);
+      throw new ApiError("No data for this station");
     }
 
     const csv = toCSV(filtered);
