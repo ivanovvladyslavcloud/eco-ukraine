@@ -2,6 +2,7 @@
 
 import Navbar from "@/components/layout/Navbar";
 import AnalyticsProvider from "../components/analytics/AnalyticsProvider";
+import Script from "next/script";
 import "./globals.css";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID
@@ -12,10 +13,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {GA_ID && ( <>
         
-        <script
+        <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
         />
-        <script id="ga-script">
+        <Script id="ga-script">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -24,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               page_path: window.location.pathname,
             });
           `}
-        </script></>)}
+        </Script></>)}
         <AnalyticsProvider />
         <Navbar />
         <main className="max-w-6xl mx-auto p-6">{children}</main>

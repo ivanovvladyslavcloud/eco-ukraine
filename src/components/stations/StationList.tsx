@@ -1,7 +1,8 @@
 import StationCard from "./StationCard";
+import { MonitoringStation } from "@/types/station";
 
 interface Props {
-  stations: any[];
+  stations: MonitoringStation[];
 }
 
 export default function StationList({ stations }: Props) {

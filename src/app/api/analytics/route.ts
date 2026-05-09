@@ -1,6 +1,7 @@
 import { withErrorHandling } from "@/lib/apiHandler";
 import { ApiError } from "@/lib/errors";
 import { REQUEST_ID_HEADER } from "@/lib/requestId";
+import type { AnalyticsEvent } from '@/types/analytics';
 
 const VALID_NAMES = new Set([
   "page_view",
@@ -16,15 +17,19 @@ const VALID_NAMES = new Set([
   "error_boundary_triggered",
 ]);
 
-function isAnalyticsEvent(value: any) {
+function isAnalyticsEvent(value: unknown): value is AnalyticsEvent {
+  if (!value || typeof value !== "object") {
+    return false;
+  }
+
+  const v = value as Record<string, unknown>;
+
   return (
-    value &&
-    typeof value === "object" &&
-    typeof value.name === "string" &&
-    VALID_NAMES.has(value.name) &&
-    typeof value.sessionId === "string" &&
-    typeof value.path === "string" &&
-    typeof value.ts === "string"
+    typeof v.name === "string" &&
+    VALID_NAMES.has(v.name) &&
+    typeof v.sessionId === "string" &&
+    typeof v.path === "string" &&
+    typeof v.ts === "string"
   );
 }
 

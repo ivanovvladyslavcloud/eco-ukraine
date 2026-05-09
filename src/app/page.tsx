@@ -3,6 +3,7 @@ import Link from "next/link";
 import Dashboard from "@/components/ui/Dashboard";
 import { MonitoringStation } from "@/types/station";
 import { fetchOrThrow } from "@/lib/fetcher";
+import { Measurement } from "@/types/measurement";
 
 export default async function HomePage() {
 
@@ -15,11 +16,11 @@ export default async function HomePage() {
   const latestJson = await fetchOrThrow(
     `http://localhost:3000/api/measurements/new`
       );
-  const latest = latestJson.data;
+  const latest: Measurement[] = latestJson.data;
 
   const stationsWithCurrent = stations.map((s) => {
     const current = latest.find(
-      (m: any) => m.stationId === s.id
+      (m: Measurement) => m.stationId === s.id
     );
 
     return {
@@ -28,8 +29,8 @@ export default async function HomePage() {
     };
   });
 
-  const latestMap: Record<string, any> = {};
-  latest.forEach((m: any) => {
+  const latestMap: Record<string, Measurement> = {};
+  latest.forEach((m: Measurement) => {
     latestMap[m.stationId] = m;
   });
 
@@ -38,7 +39,7 @@ export default async function HomePage() {
   const averagePm25 =
     values.length > 0
       ? (
-          values.reduce((sum: number, m: any) => sum + m.pm25, 0) /
+          values.reduce((sum: number, m: Measurement) => sum + m.pm25, 0) /
           values.length
         ).toFixed(1)
       : "—";

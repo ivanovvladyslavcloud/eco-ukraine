@@ -4,6 +4,8 @@ import Pagination from "@/components/ui/Pagination";
 import StationBarChart from "@/components/charts/StationBarChart";
 import { MonitoringStation } from "@/types/station";
 import { fetchOrThrow } from "@/lib/fetcher";
+import { Measurement } from "@/types/measurement";
+import Link from "next/link"
 
 export default async function StationsPage({
   searchParams,
@@ -20,12 +22,12 @@ export default async function StationsPage({
   const stations: MonitoringStation[] = stationRes.data;
 
   if (stationRes.error && stationRes.status === 400){
-    return <div className="flex flex-col items-center justify-center min-h-[300px]"> Wrong filters / input <a
+    return <div className="flex flex-col items-center justify-center min-h-[300px]"> Wrong filters / input <Link
         href="/"
         className="text-emerald-600 underline"
       >
         Return to the main page
-      </a></div>
+      </Link></div>
   }
 
   const pagination = stationRes.pagination;
@@ -38,7 +40,7 @@ export default async function StationsPage({
 
   const stationsWithCurrent = stations.map((s) => {
     const current = currentMeasurements.find(
-      (m: any) => m.stationId === s.id
+      (m: Measurement) => m.stationId === s.id
     );
 
     return {

@@ -14,8 +14,18 @@ import {
 import CustomTooltip from "./CustomTooltip";
 import { track } from "@/lib/analytics"
 
+interface ChartData {
+  time: string;
+  pm25: number;
+  pm10: number;
+  no2: number;
+  so2: number;
+  co: number;
+  o3: number;
+}
+
 interface Props {
-  data: any[];
+  data: ChartData[];
 }
 
 const pollutants = [

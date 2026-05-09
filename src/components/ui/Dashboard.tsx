@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-
+import { Measurement } from "@/types/measurement";
 import MapClient from "@/components/Map/MapClient";
 import StationFilters from "@/components/stations/StationFilters";
 
@@ -32,7 +32,7 @@ export default function Dashboard({ stations }: Props) {
     search: "",
   });
 
-  const [measurements, setMeasurements] = useState<any[]>([]);
+  const [measurements, setMeasurements] = useState<Measurement[]>([]);
   const [loadingMeasurements, setLoadingMeasurements] = useState(false);
 
   const filteredStations = useMemo(() => {

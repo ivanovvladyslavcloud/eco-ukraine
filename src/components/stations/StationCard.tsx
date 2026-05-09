@@ -1,10 +1,11 @@
 "use client";
 
+import { Measurement } from "@/types/measurement";
 import Link from "next/link";
 
 interface Props {
   station: any;
-  latest?: any;
+  latest?: Measurement;
 }
 
 function getAQIColor(pm25: number) {

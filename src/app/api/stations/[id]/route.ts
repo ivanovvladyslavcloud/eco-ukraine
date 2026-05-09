@@ -3,7 +3,7 @@ import { withErrorHandling } from "@/lib/apiHandler";
 import { ApiError } from "@/lib/errors";
 import { REQUEST_ID_HEADER } from "@/lib/requestId";
 
-export async function GET(req: Request, { params }: any) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }>}) {
   const requestId = req.headers.get(REQUEST_ID_HEADER) ?? undefined;
   return withErrorHandling(async ({}) => {
     const { id } = await params;

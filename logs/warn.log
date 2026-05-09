@@ -68,3 +68,6 @@
 {"level":40,"time":1778177674587,"pid":24628,"hostname":"Innocentius","requestId":"0cce27db-748f-4406-8360-d635d8f35073","url":"http://localhost:3000/api/analytics","method":"POST","msg":"Slow request","duration":550}
 {"level":40,"time":1778179941777,"pid":24628,"hostname":"Innocentius","requestId":"8bb8c864-cc82-43ee-8586-5f34b3ebea40","url":"http://localhost:3000/api/analytics","method":"POST","msg":"Slow request","duration":900}
 {"level":40,"time":1778179941779,"pid":24628,"hostname":"Innocentius","requestId":"5c36cc32-35d5-45a4-94b1-97264307e73b","url":"http://localhost:3000/api/analytics","method":"POST","msg":"Slow request","duration":950}
+{"level":40,"time":1778348102544,"pid":30008,"hostname":"Innocentius","requestId":"f2a848de-3373-4189-8d27-d6f294acefcf","url":"http://localhost:3000/api/analytics","method":"POST","msg":"Slow request","duration":1250}
+{"level":40,"time":1778348102547,"pid":30008,"hostname":"Innocentius","requestId":"5cb9e446-6470-447a-925a-28ac8c2dbb7a","url":"http://localhost:3000/api/analytics","method":"POST","msg":"Slow request","duration":1200}
+{"level":40,"time":1778348102549,"pid":30008,"hostname":"Innocentius","requestId":"a0a1a1e5-7e2b-4693-a096-f2ad7a9ee5e2","url":"http://localhost:3000/api/analytics","method":"POST","msg":"Slow request","duration":1300}

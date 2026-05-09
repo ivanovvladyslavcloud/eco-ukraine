@@ -1,8 +1,14 @@
 "use client";
 
+interface TooltipPayload {
+  name: string;
+  value: number;
+  color: string;
+}
+
 interface Props {
   active?: boolean;
-  payload?: any[];
+  payload?: TooltipPayload[];
   label?: string;
 }
 

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { fetchOrThrow } from "@/lib/fetcher"; // твій хелпер
+import { fetchOrThrow } from "@/lib/fetcher";
+import { Measurement } from "@/types/measurement";
 
 export function useLatestMeasurements() {
-  const [data, setData] = useState<Record<string, any>>({});
+  const [data, setData] = useState<Record<string, Measurement>>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -15,13 +16,17 @@ export function useLatestMeasurements() {
 
         if (cancelled) return;
 
-        const mapped: Record<string, any> = {};
-        json.data.forEach((m: any) => {
+        const mapped: Record<string, Measurement> = {};
+        json.data.forEach((m: Measurement) => {
           mapped[m.stationId] = m;
         });
         setData(mapped);
-      } catch (err: any) {
-        if (!cancelled) setError(err.message || "Unknown error");
+      } catch (err: unknown) {
+        if (!cancelled) {
+          setError(
+            err instanceof Error ? err.message : "Unknown error"
+          );
+        }
       } finally {
         if (!cancelled) setLoading(false);
       }

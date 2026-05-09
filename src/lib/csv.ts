@@ -1,4 +1,4 @@
-export function toCSV(data: any[]): string {
+export function toCSV<T extends Record<string, unknown>>(data: T[]): string {
   if (!data.length) return "";
 
   const headers = Object.keys(data[0]);

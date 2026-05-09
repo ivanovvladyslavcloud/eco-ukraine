@@ -1,11 +1,12 @@
 import { measurements } from "../../../../../data/mockMeasurements";
 import { REQUEST_ID_HEADER } from "@/lib/requestId";
 import { withErrorHandling } from "@/lib/apiHandler";
+import { Measurement } from "@/types/measurement";
 
 export async function GET(req: Request) {
   const requestId = req.headers.get(REQUEST_ID_HEADER) ?? undefined;
   return withErrorHandling(async () => {
-    const latestByStation: Record<string, any> = {};
+    const latestByStation: Record<string,  Measurement> = {};
 
     measurements.forEach((m) => {
       const current = latestByStation[m.stationId];
