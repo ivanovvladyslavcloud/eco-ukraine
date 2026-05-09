@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <Script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></Script>
-        <Script>
+        <Script id="ga-script">
           {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
