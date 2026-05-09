@@ -3,42 +3,34 @@ name: CI
 on:
   push:
     branches:
-      
-main
-dev
+      - main
+      - dev
 
   pull_request:
     branches:
-      
-main
+      - main
 
 jobs:
   build-and-check:
     runs-on: ubuntu-latest
 
     steps:
-      
-name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      
-name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
 
-      
-name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-      
-name: TypeScript type check
-      run: npx tsc --noEmit
+      - name: TypeScript type check
+        run: npx tsc --noEmit
 
-      
-name: Lint check
-      run: npm run lint
+      - name: Lint check
+        run: npm run lint
 
-      
-name: Build project
-      run: npm run build
+      - name: Build project
+        run: npm run build
