@@ -1,3 +1,11 @@
+### This website was created as part of the course “Web-Based Development of an Environmental Monitoring System” at the National Technical University of Ukraine "Igor Sikorsky Kyiv Polytechnic Institute", at the Research Institute of Atomic and Thermal Energy (IATE) in the Department of Digital Technologies in Energy (DTE)
+
+## Institute website: https://kpi.ua/
+
+## Department website: https://dte.kpi.ua/
+
+## Author: Vladyslav Ivanov
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
